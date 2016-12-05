@@ -5,10 +5,6 @@
   <PROCESS-ITEM ID="rules:#home.xhtml:0" NAME="item" PATH="/home.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT ID="success::#success.xhtml" NAME="output"
     PATH="/success.xhtml" TARGET="rules:#success.xhtml" TITLE="success" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT
-    ID="failure:#{employeeController.saveEmployee}:#home.xhtml"
-    NAME="output1" PATH="/home.xhtml" TARGET="rules:#home.xhtml"
-    TITLE="#{employeeController.saveEmployee}:failure" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#success.xhtml" PATH="/success.xhtml"

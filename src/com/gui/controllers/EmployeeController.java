@@ -48,27 +48,29 @@ public class EmployeeController {
 	public String saveEmployee(Employee emp) {
 		FacesContext context = FacesContext.getCurrentInstance();
 		if(employee.getFirstName() != null && employee.getFirstName().equals("")){
-			context.addMessage("First Name", new FacesMessage("First Name is required."));
+			context.addMessage("First Name", new FacesMessage(FacesMessage.SEVERITY_ERROR, "First Name is required.", ""));
 		} else if(!Pattern.matches(NAME_PATTERN, employee.getFirstName())){
-			context.addMessage("First Name", new FacesMessage("First Name allows only characters."));
+			context.addMessage("First Name", new FacesMessage(FacesMessage.SEVERITY_ERROR, "First Name allows only Alphabets.", ""));
+		} else if(employee.getFirstName().length() > 7){
+			context.addMessage("First Name", new FacesMessage(FacesMessage.SEVERITY_ERROR, "First Name allows only 7 characters.", ""));
 		}
 
 		if(employee.getLastName() != null && employee.getLastName().equals("")){
-			context.addMessage("First Name", new FacesMessage("Last Name is required."));
+			context.addMessage("First Name", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Last Name is required.", ""));
 		} else if(!Pattern.matches(NAME_PATTERN, employee.getLastName())){
-			context.addMessage("First Name", new FacesMessage("Last Name allows only characters."));
+			context.addMessage("First Name", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Last Name allows only characters.", ""));
 		}
 
 		String sal = String.valueOf(employee.getSalary());
-		if(sal == null){
-			context.addMessage("Salary", new FacesMessage("Salary is required."));
+		if(sal == null || sal.equals("0.0")){
+			context.addMessage("Salary", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Salary is required.", ""));
 		} else if(!Pattern.matches(DOUBLE_PATTERN, sal)){
-			context.addMessage("Salary", new FacesMessage("Salary accepts only XXX.XX format"));
+			context.addMessage("Salary", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Salary accepts only XXX.XX format", ""));
 			
 		}
 		
 		if(context.getMessageList().size() > 0){
-			return "failure";
+			return null;
 		} else {
 			service.addEmployee(emp);
 			return "success";

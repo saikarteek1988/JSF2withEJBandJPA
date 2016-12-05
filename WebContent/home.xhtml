@@ -9,27 +9,31 @@
 	<title>Add User</title>
 </h:head>
 <h:body>
-	<h:form>
+	<h:form id="form">
+		<p:messages id="msgs" autoUpdate="true"/>
 		<p:panel header="User Creation">
-			<p:messages autoUpdate="true" style="color:red"/>
-			<h:panelGrid columns="2" cellpadding="5">
-
+			<h:panelGrid id="grid" columns="3" cellpadding="5">
 				<p:outputLabel for="firstName" value="First Name" />
 				<p:inputText id="firstName"
-					value="#{employeeController.employee.firstName}">
+					value="#{employeeController.employee.firstName}" validatorMessage="Please enter alphabets">
+					<f:validateRegex pattern="^[a-zA-Z]+$" />
 				</p:inputText>
+				<p:message for="firstName" display="text" style="color:red"/>
 
 				<p:outputLabel for="lastName" value="Last Name" />
 				<p:inputText id="lastName"
-					value="#{employeeController.employee.lastName}">
+					value="#{employeeController.employee.lastName}" validatorMessage="Please enter alphabets">
+					<f:validateRegex pattern="^[a-zA-Z]+$" />
 				</p:inputText>
+				<p:message for="lastName" display="text" style="color:red"/>
 
 				<p:outputLabel for="salary" value="salary" />
 				<p:inputText id="salary"
-					value="#{employeeController.employee.salary}" />
+					value="#{employeeController.employee.salary}">
+				</p:inputText>
 
 				<p:commandButton value="Save"
-					action="#{employeeController.saveEmployee(employeeController.employee)}"></p:commandButton>
+					action="#{employeeController.saveEmployee(employeeController.employee)}"  update="grid" validateClient="true"></p:commandButton>
 			</h:panelGrid>
 		</p:panel>
 	</h:form>
